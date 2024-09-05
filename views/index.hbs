@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Form</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<div class="page-counter" style="position: fixed; top: 10px; right: 10px; background-color: rgba(0,0,0,0.5); color: white; padding: 5px 10px; border-radius: 5px;">
+    Page visited : <span id="page-counter-value">{{increment}} times</span>
+</div>
+
+<body>
+
+    <div class="container mt-3">
+        <div class="mt-4 p-5 bg-primary text-white rounded">
+            <h1>Tourist Documentation</h1>
+            <p>
+                Know your destination before you leave!!!
+            </p>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <h1>Search For Cities using Country ID</h1>
+        <form action="/cities" method="POST" class="d-flex">
+      
+            <input class="form-control me-2" name="CountryID" type="search" placeholder="Search" aria-label="Search">
+   
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="container mt-5">
+        <h1>Available Countries</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Currency</th>
+                    <th>Country ID</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {{#each countriesList}}
+                <tr>
+                    <td><a href="/cities?CountryID={{this.code}}">{{this.name}}</a></td>
+                    <td>{{this.currencyCodes}}</td>
+                    <td>{{this.code}}</td>
+    
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/countries/previous?offsetCount={{offsetCount}}"
+                    class="btn btn-primary float-left">Previous</a>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <a href="/countries/next?offsetCount={{offsetCount}}" class="btn btn-primary float-right">Next</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
